@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --background: 245 245 245;
+    --foreground: 26 26 26;
+    --card: 255 255 255;
+    --card-foreground: 26 26 26;
+    --popover: 255 255 255;
+    --popover-foreground: 26 26 26;
+    --primary: 99 102 241;
+    --primary-foreground: 255 255 255;
+    --secondary: 243 244 246;
+    --secondary-foreground: 26 26 26;
+    --accent: 139 92 246;
+    --accent-foreground: 255 255 255;
+    --muted: 243 244 246;
+    --muted-foreground: 107 114 128;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 229 231 235;
+    --input: 229 231 235;
+    --ring: 99 102 241;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 26 26 26;
+    --foreground: 245 245 245;
+    --card: 38 38 38;
+    --card-foreground: 245 245 245;
+    --popover: 38 38 38;
+    --popover-foreground: 245 245 245;
+    --primary: 99 102 241;
+    --primary-foreground: 255 255 255;
+    --secondary: 55 65 81;
+    --secondary-foreground: 245 245 245;
+    --accent: 139 92 246;
+    --accent-foreground: 255 255 255;
+    --muted: 55 65 81;
+    --muted-foreground: 156 163 175;
+    --destructive: 220 38 38;
+    --destructive-foreground: 255 255 255;
+    --border: 55 65 81;
+    --input: 55 65 81;
+    --ring: 139 92 246;
+  }
+}
+
+@layer utilities {
+  .animated-underline {
+    @apply relative py-1;
+  }
+
+  .animated-underline::after {
+    @apply content-[''] absolute w-full h-[2px] bg-accent bottom-0 left-0 scale-x-0 transform-gpu transition-transform duration-300 ease-in-out origin-center;
+  }
+
+  .animated-underline:hover::after {
+    @apply scale-x-100;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+      transform: translateY(-15px) rotate(1deg);
+    }
+
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+  }
+
+  @keyframes lineReveal {
+    from {
+      opacity: 0;
+      transform: translateY(40%);
+      clip-path: inset(0 0 100% 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-line-reveal {
+    animation: lineReveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  /* Sticky Project Cards */
+  .project-card-container {
+    position: relative;
+    overflow: visible !important;
+    contain: layout style;
+  }
+
+  .project-card {
+    position: sticky;
+    height: clamp(400px, 75vh, 800px);
+    width: 100%;
+    border-radius: clamp(16px, 3vw, 32px);
+    overflow: hidden;
+    margin-bottom: 40vh;
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.15);
+    background-color: inherit;
+    will-change: transform, top;
+    transform: translateZ(0);
+  }
+
+  .project-card:last-child {
+    margin-bottom: 5vh;
+  }
+
+  @media (max-width: 1024px) {
+    .project-card {
+      height: clamp(350px, 50vh, 600px);
+      margin-bottom: 25vh;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-card {
+      height: clamp(300px, 45vh, 500px);
+      margin-bottom: 20vh;
+      border-radius: 24px;
+    }
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Background Utilities */
+.bg-project-yellow {
+  background-color: #FACC15;
+}
+
+.bg-project-purple {
+  background-color: #7C3AED;
+}
+
+.bg-project-orange {
+  background-color: #F97316;
+}
+
+.bg-project-green {
+  background-color: #10B981;
+}
+
+.bg-project-red {
+  background-color: #EF4444;
+}
+
+.bg-project-teal {
+  background-color: #14B8A6;
+}
+
+.bg-vibrant-amber {
+  background-color: #D97706;
+}
+
+.bg-vibrant-indigo {
+  background-color: #4F46E5;
+}
+
+.bg-vibrant-teal {
+  background-color: #0D9488;
+}
+
+.section-reveal {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
+}
