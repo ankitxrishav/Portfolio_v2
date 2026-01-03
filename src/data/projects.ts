@@ -33,18 +33,24 @@ export interface Project {
   imageUrl: string;
   sourceCodeUrl: string;
   liveDemoUrl?: string;
+  liveDemoText?: string;
+  secondaryLiveUrl?: string;
+  secondaryLiveText?: string;
   year: number;
 }
 
 export const projectsData: Project[] = [
   {
     id: 'proj-portfolio',
-    name: 'Personal Portfolio Website',
-    description: 'The interactive portfolio website you are currently viewing. Designed to showcase my skills, projects, and journey as an ML Engineer and Creative Technologist. Built with Next.js, React, Tailwind CSS, and Three.js for dynamic 3D visuals.',
-    technologies: ['Next.js', 'React', 'TypeScript', 'TailwindCSS', 'Three.js'],
+    name: 'Personal Portfolio Website v2.0',
+    description: 'The interactive portfolio website you are currently viewing. Designed to showcase my skills, projects, and journey as an ML Engineer and Creative Technologist. Built with Next.js, React, Tailwind CSS, and GSAP for dynamic motion. Live at: ankitxr.vercel.app and ankitx.netlify.app',
+    technologies: ['Next.js', 'React', 'TypeScript', 'TailwindCSS'],
     imageUrl: '/images/port.png',
-    sourceCodeUrl: 'https://github.com/ankitxrishav/',
-    liveDemoUrl: 'https://ankitxk.vercel.app',
+    sourceCodeUrl: 'https://github.com/ankitxrishav/Portfolio_v2',
+    liveDemoUrl: 'https://ankitxr.vercel.app',
+    liveDemoText: 'Live v2',
+    secondaryLiveUrl: 'https://ankitxk.vercel.app',
+    secondaryLiveText: 'Previous v1',
     year: new Date().getFullYear(),
   },
   {

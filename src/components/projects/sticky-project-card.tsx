@@ -104,7 +104,19 @@ export default function StickyProjectCard({
                                 rel="noopener noreferrer"
                                 className="group bg-white text-gray-900 px-4 py-2 md:px-6 md:py-3 lg:px-7 lg:py-3.5 rounded-full font-extrabold hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 text-xs md:text-sm shadow-xl"
                             >
-                                <span>Live Demo</span>
+                                <span>{project.liveDemoText || 'Live Demo'}</span>
+                                <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </Link>
+                        )}
+
+                        {project.secondaryLiveUrl && (
+                            <Link
+                                href={project.secondaryLiveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group bg-white/10 backdrop-blur-md text-white border border-white/20 px-4 py-2 md:px-6 md:py-3 lg:px-7 lg:py-3.5 rounded-full font-extrabold hover:bg-white/20 transition-all duration-300 flex items-center gap-2 text-xs md:text-sm"
+                            >
+                                <span>{project.secondaryLiveText || 'Live Demo'}</span>
                                 <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                             </Link>
                         )}

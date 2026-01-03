@@ -1,27 +1,37 @@
-# Ankit Kumar Portfolio v2
+# Ankit Kumar Portfolio v2.0
 
-A premium, cinematic portfolio website built with **Next.js 14**, **Tailwind CSS**, and **GSAP**. This project focuses on high-end motion design, fluid color transitions, and a mobile-first responsive architecture.
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![GSAP](https://img.shields.io/badge/GSAP-3.12-88CE02?style=flat-square&logo=greensock)](https://greensock.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Vercel](https://img.shields.io/badge/Vercel-Deploy-black?style=flat-square&logo=vercel)](https://ankitxr.vercel.app)
+[![Netlify](https://img.shields.io/badge/Netlify-Deploy-00C7B7?style=flat-square&logo=netlify)](https://ankitx.netlify.app)
 
-## 🚀 Key Features
+A premium, cinematic portfolio website built to showcase high-end motion design, fluid color transitions, and a mobile-first responsive architecture.
 
-- **Cinematic Backgrounds**: A custom dual-layer cross-fade system that smoothly transitions through curated color palettes every 10 seconds.
-- **Interactive Stack Design**: Responsive "Sticky" project cards that stack vertically as you scroll, providing a high-impact showcase of work.
-- **Precision Motion**: Sophisticated word-by-word reveal animations and scroll-triggered physics elements using GSAP and Intersection Observer.
-- **3D Atmospheric Elements**: subtle 3D background particles and floating elements built with custom CSS and Three.js components.
-- **Editorial Typography**: A clean, high-contrast layout emphasizing readability and professional hierarchy.
-- **Mobile Optimized**: Custom responsive logic that streamlines the visual experience for smaller screens (e.g., hiding complex mockups while preserving the signature sticky flow).
+## Live Access
 
-## 🛠️ Built With
+The portfolio is mirrored across two production environments for maximum availability:
+- **Primary**: [ankitxr.vercel.app](https://ankitxr.vercel.app)
+- **Secondary**: [ankitx.netlify.app](https://ankitx.netlify.app)
 
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animation**: [GSAP](https://greensock.com/gsap/) (ScrollTrigger)
-- **3D Rendering**: [Three.js](https://threejs.org/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Components**: [Radix UI](https://www.radix-ui.com/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
+## Key Features
 
-## 📦 Getting Started
+- **Cinematic Background Engine**: Custom dual-layer cross-fade system that smoothly transitions through curated color palettes using a 5-second blend hand-off.
+- **Interactive Stacking Layout**: Responsive "Sticky" project cards that stack vertically, providing a high-impact editorial showcase.
+- **Precision Motion Control**: Sophisticated word-reveal animations and scroll-triggered physics elements powered by GSAP.
+- **Atmospheric "Breathing" System**: Very subtle background scale and hue shifts that create a living environment.
+- **Optimized Performance**: Lightweight architecture achieved by pruning unused UI components and streamlining third-party dependencies.
+
+## Built With
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Vanilla Tailwind CSS
+- **Animation**: GSAP (ScrollTrigger) with Lenis Smooth Scroll
+- **Icons**: Lucide React
+- **Language**: TypeScript
+
+## Getting Started
 
 ### Prerequisites
 
@@ -32,7 +42,7 @@ A premium, cinematic portfolio website built with **Next.js 14**, **Tailwind CSS
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ankitxrishav/portfolio_v2.git
+   git clone https://github.com/ankitxrishav/Portfolio_v2.git
    ```
 
 2. Install dependencies:
@@ -45,24 +55,18 @@ A premium, cinematic portfolio website built with **Next.js 14**, **Tailwind CSS
    npm run dev
    ```
 
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+## Project Structure
 
-## 📂 Project Structure
-
-- `src/app`: Page routing and layout configuration.
+- `src/app`: Page routing and core layout orchestration.
 - `src/components`: Modular UI components (Hero, Projects, Journey, etc.).
-- `src/components/ui`: Reusable animation wrappers (WordReveal, ScrollReveal, SectionWrapper).
-- `src/data`: Centralized project and timeline content.
-- `public`: Static assets and media.
+- `src/components/ui`: Custom animation wrappers and layout utilities.
+- `src/data`: Structured content for projects and historical timeline.
+- `public`: Static assets and media files.
 
-## 📄 License
+## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-Developed with ❤️ by [Ankit Kumar](https://github.com/ankitxrishav)
-
+Developed by [Ankit Kumar](https://github.com/ankitxrishav)
