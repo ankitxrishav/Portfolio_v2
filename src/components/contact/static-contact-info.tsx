@@ -12,7 +12,7 @@ export default function StaticContactInfo() {
 
       <div className="flex flex-col md:flex-row items-center justify-center gap-10 pt-8 border-t border-white/20">
         <a
-          href="mailto:ankit.krx2502@gmail.com"
+          href="mailto:ankitkrpt@gmail.com"
           className="text-white/80 hover:text-white transition-all duration-200 flex items-center gap-4 text-xl font-bold uppercase tracking-widest"
         >
           <Mail className="h-7 w-7" />
