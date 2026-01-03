@@ -12,8 +12,8 @@ A premium, cinematic portfolio website built to showcase high-end motion design,
 ## Live Access
 
 The portfolio is mirrored across two production environments for maximum availability:
-- **Primary**: [ankitxr.vercel.app](https://ankitxr.vercel.app)
-- **Secondary**: [ankitx.netlify.app](https://ankitx.netlify.app)
+- **Vercel**: [ankitxr.vercel.app](https://ankitxr.vercel.app)
+- **Netlify**: [ankitx.netlify.app](https://ankitx.netlify.app)
 
 ## Key Features
 

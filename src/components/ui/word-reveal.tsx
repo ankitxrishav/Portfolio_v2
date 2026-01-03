@@ -31,6 +31,17 @@ export default function WordReveal({
         const container = containerRef.current;
         if (!container) return;
 
+        // Immediately hide words to prevent flash of content
+        const words = wordsContainerRef.current?.querySelectorAll('.word-inner');
+        if (words) {
+            gsap.set(words, {
+                y: "110%",
+                opacity: 0,
+                rotateX: 45,
+                scale: 0.9,
+            });
+        }
+
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting && !hasAnimated) {
@@ -38,7 +49,7 @@ export default function WordReveal({
                     observer.disconnect();
                 }
             },
-            { threshold: triggerThreshold, rootMargin: "0px 0px -50px 0px" }
+            { threshold: triggerThreshold, rootMargin: "0px 0px -100px 0px" }
         );
 
         observer.observe(container);
@@ -52,7 +63,10 @@ export default function WordReveal({
             const words = wordsContainerRef.current?.querySelectorAll('.word-inner');
             if (!words) return;
 
-            const tl = gsap.timeline({ delay: delay / 1000 });
+            const tl = gsap.timeline({
+                delay: delay / 1000,
+                defaults: { ease: "power4.out", force3D: true }
+            });
 
             tl.to(words, {
                 y: 0,
@@ -61,8 +75,6 @@ export default function WordReveal({
                 scale: 1,
                 duration: duration,
                 stagger: stagger,
-                ease: "power4.out",
-                force3D: true,
             });
 
             if (ctaRef.current) {
@@ -90,8 +102,7 @@ export default function WordReveal({
                         className="inline-block overflow-hidden mr-[0.25em] mb-[0.1em] perspective-1000"
                     >
                         <span
-                            className="word-inner inline-block translate-y-[110%] opacity-0 rotate-x-45 scale-90 will-change-transform"
-                            style={{ transition: 'none' }}
+                            className="word-inner inline-block will-change-transform"
                         >
                             {word}
                         </span>

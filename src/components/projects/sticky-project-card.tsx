@@ -54,7 +54,7 @@ export default function StickyProjectCard({
                 }}
             />
             <div
-                className="absolute inset-0 transition-opacity duration-[5000ms] ease-in-out z-[1]"
+                className="absolute inset-0 transition-opacity duration-5000 ease-in-out z-[1]"
                 style={{
                     background: currentPalette
                         ? `linear-gradient(135deg, ${currentPalette.from} 0%, ${currentPalette.to} 100%)`

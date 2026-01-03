@@ -94,7 +94,7 @@ export default function HomePage() {
           }}
         />
         <div
-          className="absolute inset-0 transition-opacity duration-[5000ms] ease-in-out z-[1] animate-breathing"
+          className="absolute inset-0 transition-opacity duration-5000 ease-in-out z-[1] animate-breathing"
           style={{
             background: `linear-gradient(135deg, ${nextPalette.from} 0%, ${nextPalette.to} 100%)`,
             opacity: isTransitioning ? 1 : 0
@@ -116,7 +116,7 @@ export default function HomePage() {
           />
 
           <WordReveal
-            text="Turning ideas into intelligent systems."
+            text="I like turning ideas into things that work."
             className="text-2xl md:text-4xl lg:text-5xl font-extrabold mb-4 tracking-tight leading-tight opacity-90"
             stagger={0.05}
             delay={400}

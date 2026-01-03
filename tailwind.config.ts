@@ -132,6 +132,12 @@ export default {
         'scale-in': 'scaleIn 500ms ease-out forwards',
         'breathing': 'breathing 40s ease-in-out infinite',
       },
+      transitionDuration: {
+        '2000': '2000ms',
+        '3000': '3000ms',
+        '5000': '5000ms',
+        '10000': '10000ms',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

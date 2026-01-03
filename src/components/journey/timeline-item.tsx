@@ -51,8 +51,8 @@ export default function TimelineItem({
   return (
     <div className={cn(
       "relative w-full flex",
+      "justify-center md:items-start",
       isEven ? "md:justify-start" : "md:justify-end",
-      "justify-end pl-14 md:pl-0" // Shift right on mobile to avoid line
     )}>
       {/* Connector line to the main path */}
       <div className={cn(
@@ -63,7 +63,7 @@ export default function TimelineItem({
       <div
         ref={cardRef}
         className={cn(
-          "w-full md:w-[42%] relative z-10 overflow-hidden",
+          "w-[90%] md:w-[42%] relative z-10 overflow-hidden",
           "border border-white/20 p-5 md:p-8 rounded-2xl shadow-xl transition-all duration-300 group"
         )}
       >
@@ -77,7 +77,7 @@ export default function TimelineItem({
           }}
         />
         <div
-          className="absolute inset-0 transition-opacity duration-[5000ms] ease-in-out z-[1]"
+          className="absolute inset-0 transition-opacity duration-5000 ease-in-out z-[1]"
           style={{
             background: currentPalette
               ? `linear-gradient(135deg, ${currentPalette.from} 0%, ${currentPalette.to} 100%)`

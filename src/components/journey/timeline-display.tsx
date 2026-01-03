@@ -84,7 +84,7 @@ export default function TimelineDisplay({
   return (
     <div ref={containerRef} className="relative py-24 px-4 overflow-visible bg-transparent">
       {/* Central Vertical Line (SVG Path) */}
-      <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-8 flex justify-center h-full pointer-events-none md:left-1/2 md:translate-x-[-50%] sm:left-4 sm:translate-x-0">
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-8 flex justify-center h-full pointer-events-none">
         <svg
           className="h-full w-full"
           preserveAspectRatio="none"
