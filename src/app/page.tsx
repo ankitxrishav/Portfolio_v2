@@ -161,35 +161,36 @@ export default function HomePage() {
         </SectionWrapper>
       </section>
 
-      <section className="bg-vibrant-indigo py-24 text-white section-reveal">
-        <SectionWrapper
-          id="journey-skills"
-          title={<WordReveal text="Journey & Expertise" className="text-3xl md:text-5xl font-black uppercase tracking-tighter" />}
-          subtitle={<ScrollReveal animation="fade-up" delay={500}>Exploring my professional path and the skills I've honed along the way.</ScrollReveal>}
-          aria-labelledby="journey-skills-heading"
-          className="bg-transparent"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10 items-start">
-            <ScrollReveal animation="fade-up" delay={800}>
-              <div>
-                <Card className="relative overflow-visible mb-8 p-4 text-center bg-white/10 backdrop-blur-sm border-white/20">
-                  <h3 className="font-headline text-2xl font-bold text-white">My Journey</h3>
-                  <div className="absolute left-1/2 bottom-0 w-3 h-3 bg-indigo-500 transform -translate-x-1/2 translate-y-1/2 rotate-45 border-b border-r border-white/20"></div>
-                </Card>
-                <TimelineDisplay />
-              </div>
-            </ScrollReveal>
-            <ScrollReveal animation="fade-up" delay={1000}>
-              <div>
-                <Card className="relative overflow-visible mb-8 p-4 text-center bg-white/10 backdrop-blur-sm border-white/20">
-                  <h3 className="font-headline text-2xl font-bold text-white">My Skillset</h3>
-                  <div className="absolute left-1/2 bottom-0 w-3 h-3 bg-indigo-500 transform -translate-x-1/2 translate-y-1/2 rotate-45 border-b border-r border-white/20"></div>
-                </Card>
-                <SkillsDisplay />
-              </div>
-            </ScrollReveal>
-          </div>
-        </SectionWrapper>
+      <section className="relative overflow-hidden section-reveal">
+        {/* Journey Section - Deepest Dark */}
+        <div className="bg-[#020617]">
+          <SectionWrapper
+            id="journey"
+            title={<WordReveal text="My Journey" className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white" />}
+            subtitle={<ScrollReveal animation="fade-up" delay={500}><span className="text-slate-400">Exploring the professional path and academic milestones that shaped my expertise.</span></ScrollReveal>}
+            aria-labelledby="journey-heading"
+            className="bg-transparent py-20 pb-10"
+          >
+            <TimelineDisplay
+              paletteIndex={paletteIndex}
+              prevPaletteIndex={currentDisplayIndex}
+              isTransitioning={isTransitioning}
+            />
+          </SectionWrapper>
+        </div>
+
+        {/* Expertise Section - Slightly lighter/offset dark */}
+        <div className="bg-[#0f172a] border-t border-white/5">
+          <SectionWrapper
+            id="expertise"
+            title={<WordReveal text="My Expertise" className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white" />}
+            subtitle={<ScrollReveal animation="fade-up" delay={500}><span className="text-slate-400">A deep dive into the technologies and tools I master to build intelligent systems.</span></ScrollReveal>}
+            aria-labelledby="skills-heading"
+            className="bg-transparent py-16"
+          >
+            <SkillsDisplay />
+          </SectionWrapper>
+        </div>
       </section>
 
       <section className="bg-vibrant-teal py-24 text-white section-reveal">
