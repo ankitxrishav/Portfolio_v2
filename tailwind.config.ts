@@ -119,6 +119,10 @@ export default {
             transform: 'scale(1)',
           },
         },
+        'breathing': {
+          '0%, 100%': { transform: 'scale(1)', filter: 'hue-rotate(0deg)' },
+          '50%': { transform: 'scale(1.02)', filter: 'hue-rotate(2deg)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -126,9 +130,9 @@ export default {
         'float': 'float 4s ease-in-out infinite',
         'fade-in-up': 'fadeInUp 600ms ease-out forwards',
         'scale-in': 'scaleIn 500ms ease-out forwards',
+        'breathing': 'breathing 40s ease-in-out infinite',
       },
     },
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
-

@@ -11,6 +11,12 @@ const PROJECT_PALETTES = [
   { from: '#2563EB', to: '#7C3AED' }, // Blue-Purple
   { from: '#F59E0B', to: '#D97706' }, // Amber-Orange
   { from: '#10B981', to: '#059669' }, // Emerald-Green
+  { from: '#EC4899', to: '#8B5CF6' }, // Pink-Purple
+  { from: '#06B6D4', to: '#3B82F6' }, // Cyan-Blue
+  { from: '#8B5CF6', to: '#EC4899' }, // Purple-Pink-Vibrant
+  { from: '#14B8A6', to: '#6366F1' }, // Teal-Indigo
+  { from: '#F43F5E', to: '#FB923C' }, // Rose-Orange
+  { from: '#3B82F6', to: '#2DD4BF' }, // Blue-Teal
 ];
 
 interface ProjectListProps {

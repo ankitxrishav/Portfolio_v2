@@ -50,9 +50,9 @@ export default function TimelineItem({
 
   return (
     <div className={cn(
-      "relative w-full flex mb-12 last:mb-0",
+      "relative w-full flex",
       isEven ? "md:justify-start" : "md:justify-end",
-      "justify-end" // Always start from right on mobile
+      "justify-end pl-14 md:pl-0" // Shift right on mobile to avoid line
     )}>
       {/* Connector line to the main path */}
       <div className={cn(
@@ -64,8 +64,7 @@ export default function TimelineItem({
         ref={cardRef}
         className={cn(
           "w-full md:w-[42%] relative z-10 overflow-hidden",
-          "border border-white/20 p-6 rounded-2xl shadow-xl transition-all duration-300 group",
-          "md:p-8"
+          "border border-white/20 p-5 md:p-8 rounded-2xl shadow-xl transition-all duration-300 group"
         )}
       >
         {/* Cinematic Cross-fade Layers */}

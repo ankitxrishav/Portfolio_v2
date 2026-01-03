@@ -6,6 +6,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import AppHeader from '@/components/layout/app-header';
 import AppFooter from '@/components/layout/app-footer';
+import SmoothScroll from '@/components/ui/smooth-scroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -79,17 +80,19 @@ export default function RootLayout({
         <meta name="theme-color" content="#222222" />
       </head>
       <body className="font-body antialiased bg-background text-foreground">
-        <div id="preloader" className="fixed inset-0 z-[99999] bg-background transition-opacity"></div>
+        <SmoothScroll>
+          <div id="preloader" className="fixed inset-0 z-[99999] bg-background transition-opacity"></div>
 
-        <AppHeader />
+          <AppHeader />
 
-        <main className="flex-grow relative z-10">
-          {children}
-        </main>
+          <main className="flex-grow relative z-10">
+            {children}
+          </main>
 
-        <AppFooter />
+          <AppFooter />
 
-        <Toaster />
+          <Toaster />
+        </SmoothScroll>
       </body>
     </html>
   );

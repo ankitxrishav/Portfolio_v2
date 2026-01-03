@@ -1,4 +1,4 @@
-# Ankit Kumar | AI & Machine Learning Portfolio
+# Ankit Kumar Portfolio v2
 
 A premium, cinematic portfolio website built with **Next.js 14**, **Tailwind CSS**, and **GSAP**. This project focuses on high-end motion design, fluid color transitions, and a mobile-first responsive architecture.
 
@@ -64,5 +64,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-Developed by [Ankit Kumar](https://github.com/ankitxrishav)
+Developed with ❤️ by [Ankit Kumar](https://github.com/ankitxrishav)
 

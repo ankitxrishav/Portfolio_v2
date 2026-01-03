@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Code2, Sun, Moon, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 const navItems = [
   { href: '/#home', label: 'Home' },

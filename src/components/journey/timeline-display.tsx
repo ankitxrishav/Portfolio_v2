@@ -19,6 +19,12 @@ const PROJECT_PALETTES = [
   { from: '#2563EB', to: '#7C3AED' }, // Blue-Purple
   { from: '#F59E0B', to: '#D97706' }, // Amber-Orange
   { from: '#10B981', to: '#059669' }, // Emerald-Green
+  { from: '#EC4899', to: '#8B5CF6' }, // Pink-Purple
+  { from: '#06B6D4', to: '#3B82F6' }, // Cyan-Blue
+  { from: '#8B5CF6', to: '#EC4899' }, // Purple-Pink-Vibrant
+  { from: '#14B8A6', to: '#6366F1' }, // Teal-Indigo
+  { from: '#F43F5E', to: '#FB923C' }, // Rose-Orange
+  { from: '#3B82F6', to: '#2DD4BF' }, // Blue-Teal
 ];
 
 export default function TimelineDisplay({
@@ -106,9 +112,9 @@ export default function TimelineDisplay({
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 px-2 md:px-0">
         {currentTimelineData.length > 0 ? (
-          <div className="space-y-0 relative">
+          <div className="flex flex-col gap-10 md:gap-12 relative">
             {currentTimelineData.map((event, index) => {
               const cardPalette = PROJECT_PALETTES[(paletteIndex + index) % PROJECT_PALETTES.length];
               const prevCardPalette = PROJECT_PALETTES[(prevPaletteIndex + index) % PROJECT_PALETTES.length];

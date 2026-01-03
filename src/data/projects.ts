@@ -101,6 +101,7 @@ export const projectsData: Project[] = [
     technologies: ['React', 'Next.js', 'TailwindCSS', 'TypeScript'],
     imageUrl: '/images/fenrirstudy.png',
     sourceCodeUrl: 'https://github.com/ankitxrishav/FenrirStudy',
+    liveDemoUrl: 'https://fenrirstudy.vercel.app',
     year: 2024,
   },
 ];
