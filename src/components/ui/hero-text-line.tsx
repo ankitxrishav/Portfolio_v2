@@ -19,3 +19,4 @@ const HeroTextLine = ({ text, className, delay }: HeroTextLineProps) => {
 };
 
 export default HeroTextLine;
+

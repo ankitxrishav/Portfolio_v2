@@ -58,3 +58,4 @@ export const timelineData: TimelineEvent[] = [
     icon: GraduationCap,
   },
 ];
+

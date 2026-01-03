@@ -73,3 +73,4 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     </Link>
   );
 }
+

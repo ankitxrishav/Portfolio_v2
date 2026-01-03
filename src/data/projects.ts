@@ -106,3 +106,4 @@ export const projectsData: Project[] = [
 ];
 
 export const allTechnologies: Technology[] = Array.from(new Set(projectsData.flatMap(p => p.technologies))).sort() as Technology[];
+

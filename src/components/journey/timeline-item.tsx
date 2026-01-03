@@ -32,3 +32,4 @@ export default function TimelineItem({ event, isLast }: TimelineItemProps) {
     </div>
   );
 }
+

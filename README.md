@@ -65,3 +65,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ---
 
 Developed by [Ankit Kumar](https://github.com/ankitxrishav)
+
