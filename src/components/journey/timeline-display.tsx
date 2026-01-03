@@ -10,7 +10,7 @@ export default function TimelineDisplay() {
   return (
     <div>
       {currentTimelineData.length > 0 ? (
-        <div className="space-y-2">
+        <div className="space-y-4">
           {currentTimelineData.map((event, index) => (
             <TimelineItem key={event.id} event={event} isLast={index === currentTimelineData.length - 1} />
           ))}

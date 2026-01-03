@@ -1,58 +1,75 @@
-
 import type { Project } from '@/data/projects';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Github, ExternalLink } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const hasDemo = !!project.liveDemoUrl;
+  const primaryLink = hasDemo ? project.liveDemoUrl : project.sourceCodeUrl;
+
   return (
-    <Card className="group flex flex-col h-full overflow-hidden bg-card shadow-lg hover:shadow-accent/20 transition-all duration-300 transform hover:scale-[1.01] rounded-lg">
-      <div className="relative w-full h-56">
-        <Image
-          src={project.imageUrl}
-          alt={project.name}
-          layout="fill"
-          objectFit="cover"
-          className="transition-transform duration-300 group-hover:scale-105 object-top"
-        />
-      </div>
-      <CardHeader>
-        <CardTitle className="font-headline text-xl text-foreground">{project.name}</CardTitle>
-        <CardDescription className="text-muted-foreground text-sm">{project.year}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <p className="text-foreground/80 text-sm mb-4 leading-relaxed">{project.description}</p>
-        <div className="flex flex-wrap gap-2 mb-2">
-          {project.technologies.map((tech) => (
-            <Badge key={tech} variant="secondary" className="text-xs bg-secondary/70 text-secondary-foreground hover:bg-secondary transition-colors">
-              {tech}
-            </Badge>
-          ))}
+    <Link href={primaryLink!} target="_blank" rel="noopener noreferrer" className="group block">
+      <Card className="flex flex-col h-full overflow-hidden bg-card shadow-sm hover:shadow-md transition-all duration-300 border border-border rounded-xl">
+        <div className="relative w-full aspect-[16/10] overflow-hidden bg-muted">
+          <Image
+            src={project.imageUrl}
+            alt={project.name}
+            fill
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+          />
         </div>
-      </CardContent>
-      <CardFooter className="mt-auto pt-4 border-t border-border/40">
-        <div className="flex w-full justify-between items-center gap-2">
-          <Button variant="outline" size="sm" asChild className="hover:border-accent transition-colors">
-            <Link href={project.sourceCodeUrl} target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-4 w-4" /> Source
-            </Link>
-          </Button>
-          {project.liveDemoUrl && (
-            <Button variant="default" size="sm" asChild className="bg-accent text-accent-foreground hover:bg-accent/90 hover:text-foreground transition-colors">
-              <Link href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-2 h-4 w-4" /> Demo
-              </Link>
-            </Button>
-          )}
-        </div>
-      </CardFooter>
-    </Card>
+
+        <CardHeader className="pb-4">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <h3 className="font-headline text-xl font-medium text-foreground mb-1 leading-snug">
+                {project.name}
+              </h3>
+              <p className="text-sm text-muted-foreground">{project.year}</p>
+            </div>
+            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center group-hover:bg-secondary transition-colors">
+              <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+            </div>
+          </div>
+        </CardHeader>
+
+        <CardContent className="flex-grow pt-0 space-y-4">
+          <p className="text-foreground/80 text-base leading-relaxed line-clamp-3">
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.slice(0, 4).map((tech) => (
+              <Badge
+                key={tech}
+                variant="secondary"
+                className="text-xs bg-secondary/60 text-secondary-foreground hover:bg-secondary/80 transition-colors font-normal"
+              >
+                {tech}
+              </Badge>
+            ))}
+            {project.technologies.length > 4 && (
+              <Badge
+                variant="secondary"
+                className="text-xs bg-secondary/60 text-muted-foreground font-normal"
+              >
+                +{project.technologies.length - 4}
+              </Badge>
+            )}
+          </div>
+
+          <div className="pt-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors flex items-center gap-2">
+            <span>{hasDemo ? 'View demo' : 'View source'}</span>
+            <span className="inline-block transform group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }

@@ -1,23 +1,19 @@
 "use client";
 
 import { useState, useEffect, useLayoutEffect } from 'react';
-import { Inter, Space_Grotesk } from 'next/font/google';
-import dynamic from 'next/dynamic';
+import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import AppHeader from '@/components/layout/app-header';
 import AppFooter from '@/components/layout/app-footer';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
-import Preloader from '@/components/layout/preloader';
-import PreloaderShimmer from '@/components/layout/preloader-shimmer';
-import PreloaderTypewriter from '@/components/layout/preloader-typewriter';
 
-const inter = Inter({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-plus-jakarta',
   display: 'swap',
+  weight: ['400', '600', '700', '800'],
 });
 
 const spaceGrotesk = Space_Grotesk({
@@ -26,230 +22,73 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 });
 
-const ThreeCanvas = dynamic(() => import('@/components/three-canvas'), { ssr: false });
-const CustomCursor = dynamic(() => import('@/components/ui/custom-cursor'), { ssr: false });
+
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [theme, setTheme] = useState('dark');
-  const [preloaderVariant, setPreloaderVariant] = useState<'stroke' | 'shimmer' | 'typewriter' | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const variants: Array<'stroke' | 'shimmer' | 'typewriter'> = ['stroke', 'shimmer', 'typewriter'];
-    const lastIndexStr = localStorage.getItem('preloaderIndex');
-    const lastIndex = lastIndexStr ? parseInt(lastIndexStr, 10) : -1;
-    const nextIndex = (lastIndex + 1) % variants.length;
-    localStorage.setItem('preloaderIndex', nextIndex.toString());
-    setPreloaderVariant(variants[nextIndex]);
-
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'light') {
-      setTheme('light');
-    } else {
-      setTheme('dark');
-    }
-  }, []); 
-
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [theme]);
-
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-    
-    if (!preloaderVariant) return;
-
-    const preloader = document.getElementById('preloader');
-    const header = document.getElementById('app-header');
-    if (!preloader || !header) return;
-    
-    document.body.style.overflow = 'hidden';
-    gsap.set(header, { y: '-100%', opacity: 0 });
-
-    let tl: gsap.core.Timeline;
-
-    const onComplete = () => {
-      if (preloader) {
-        const outroTl = gsap.timeline();
-        outroTl.to(preloader, {
-          opacity: 0,
-          duration: 0.5,
-          onComplete: () => {
-            preloader.style.display = 'none';
-            document.body.style.overflow = 'auto';
-          }
-        });
-        outroTl.to(header, {
-            y: '0%',
-            opacity: 1,
-            duration: 0.8,
-            ease: 'power2.out'
-        }, "-=0.3");
-      } else {
-        document.body.style.overflow = 'auto';
-        gsap.to(header, {
-            y: '0%',
-            opacity: 1,
-            duration: 0.8,
-            ease: 'power2.out'
-        });
-      }
-    };
-
-    if (preloaderVariant === 'stroke') {
-        const letters = document.querySelectorAll<HTMLElement>('.preloader-letter');
-        if (letters.length === 0) {
-            onComplete();
-            return;
-        };
-
-        tl = gsap.timeline({ onComplete });
-        
-        tl.to(letters, {
-            color: 'white',
-            stagger: 0.1,
-            ease: 'power1.inOut',
-            duration: 0.5,
-        })
-        .to({}, {duration: 0.5});
-
-    } else if (preloaderVariant === 'shimmer') {
-        const textElement = document.getElementById('preloader-text');
-        if (!textElement) {
-            onComplete();
-            return;
-        }
-
-        textElement.classList.add('shimmer-effect');
-        tl = gsap.timeline();
-        tl.to({}, {delay: 6, onComplete}); // Wait for CSS animation (2s * 3 iterations)
-    } else if (preloaderVariant === 'typewriter') {
-        const letters = document.querySelectorAll<HTMLElement>('.preloader-letter');
-        const cursor = document.getElementById('cursor');
-        if (letters.length === 0 || !cursor) {
-            onComplete();
-            return;
-        }
-
-        // Initially hide all letters so they don't take up space, and ensure cursor is visible and blinking
-        gsap.set(letters, { display: 'none' });
-        gsap.set(cursor, { opacity: 1, display: 'inline-block' });
-        if(cursor) cursor.style.animation = 'blink 1s step-end infinite';
-
-
-        tl = gsap.timeline({ onComplete });
-        
-        const typeSpeed = 0.1;
-
-        // Animate each letter appearing, which pushes the cursor to the right
-        letters.forEach((letter) => {
-            tl.set(letter, { display: 'inline-block' }, `+=${typeSpeed}`);
-        });
-
-        // After typing, stop the CSS blink and make it blink with GSAP, then fade out
-        tl.call(() => {
-            if (cursor) cursor.style.animation = 'none';
-        })
-        .to(cursor, {
-            opacity: 0,
-            ease: 'power1.inOut',
-            duration: 0.5,
-            repeat: 2, // blink
-            yoyo: true
-        }, '+=0.5')
-        .to({}, {duration: 0.5});
-    }
-
-    return () => {
-      if (tl) tl.kill();
-      document.body.style.overflow = 'auto';
-    };
-  }, [preloaderVariant]);
-
-  useLayoutEffect(() => {
-    const smoother = ScrollSmoother.create({
-      wrapper: '#smooth-wrapper',
-      content: '#smooth-content',
-      smooth: 1.5,
-      effects: true,
-    });
-
-    return () => {
-      if (smoother) smoother.kill();
-    };
+    // Simple fade-in delay
+    setTimeout(() => setLoading(false), 1000);
   }, []);
 
-  const toggleTheme = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
 
-    if (!document.startViewTransition) {
-      setTheme(newTheme);
-      return;
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+      const header = document.getElementById('app-header');
+      if (header) {
+        gsap.set(header, { y: '-100%', opacity: 0 });
+      }
+    } else {
+      const preloader = document.getElementById('preloader');
+      const header = document.getElementById('app-header');
+
+      gsap.to(preloader, {
+        opacity: 0,
+        duration: 0.6,
+        onComplete: () => {
+          if (preloader) preloader.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      if (header) {
+        gsap.to(header, {
+          y: '0%',
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          delay: 0.2
+        });
+      }
     }
-    
-    const x = event.clientX;
-    const y = event.clientY;
-    const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    );
-
-    document.documentElement.style.setProperty('--reveal-x', `${x}px`);
-    document.documentElement.style.setProperty('--reveal-y', `${y}px`);
-    document.documentElement.style.setProperty('--reveal-radius', `${endRadius}px`);
-
-    const transition = document.startViewTransition(() => {
-      setTheme(newTheme);
-    });
-
-    transition.ready.then(() => {
-      document.documentElement.style.removeProperty('--reveal-x');
-      document.documentElement.style.removeProperty('--reveal-y');
-      document.documentElement.style.removeProperty('--reveal-radius');
-    });
-  };
+  }, [loading]);
 
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}> 
+    <html lang="en" className={`${plusJakarta.variable} ${spaceGrotesk.variable} dark`}>
       <head>
         <title>Ankit Kumar Portfolio</title>
         <meta name="description" content="Portfolio of Ankit Kumar, an AIML Enthusiast & Builder." />
         <link rel="icon" href="data:image/x-icon;base64,=" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#222222" />
       </head>
       <body className="font-body antialiased bg-background text-foreground">
-        {preloaderVariant && (
-            <>
-              {preloaderVariant === 'stroke' && <Preloader />}
-              {preloaderVariant === 'shimmer' && <PreloaderShimmer />}
-              {preloaderVariant === 'typewriter' && <PreloaderTypewriter />}
-            </>
-        )}
-        {!preloaderVariant && <div id="preloader" className="fixed inset-0 z-[99999] bg-black"></div>}
-        
-        <CustomCursor />
-        <ThreeCanvas /> 
-        <AppHeader currentTheme={theme} toggleTheme={toggleTheme} />
-        
-        <div id="smooth-wrapper">
-          <div id="smooth-content">
-            <main className="flex-grow relative z-10">
-              {children}
-            </main>
-            <AppFooter />
-          </div>
-        </div>
-        
+        <div id="preloader" className="fixed inset-0 z-[99999] bg-background transition-opacity"></div>
+
+        <AppHeader />
+
+        <main className="flex-grow relative z-10">
+          {children}
+        </main>
+
+        <AppFooter />
+
         <Toaster />
       </body>
     </html>

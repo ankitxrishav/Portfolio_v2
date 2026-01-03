@@ -1,17 +1,17 @@
 
-export type Technology = 
-  'Python' | 
-  'TensorFlow' | 
-  'PyTorch' | 
-  'Scikit-learn' | 
-  'Next.js' | 
-  'React' | 
-  'Node.js' | 
-  'MongoDB' | 
-  'SQL' | 
-  'AWS' | 
-  'Docker' | 
-  'TypeScript' | 
+export type Technology =
+  'Python' |
+  'TensorFlow' |
+  'PyTorch' |
+  'Scikit-learn' |
+  'Next.js' |
+  'React' |
+  'Node.js' |
+  'MongoDB' |
+  'SQL' |
+  'AWS' |
+  'Docker' |
+  'TypeScript' |
   'TailwindCSS' |
   'Pandas' |
   'NumPy' |
@@ -42,8 +42,8 @@ export const projectsData: Project[] = [
     name: 'Personal Portfolio Website',
     description: 'The interactive portfolio website you are currently viewing. Designed to showcase my skills, projects, and journey as an ML Engineer and Creative Technologist. Built with Next.js, React, Tailwind CSS, and Three.js for dynamic 3D visuals.',
     technologies: ['Next.js', 'React', 'TypeScript', 'TailwindCSS', 'Three.js'],
-    imageUrl: '/images/port.png', 
-    sourceCodeUrl: 'https://github.com/ankitxrishav/', 
+    imageUrl: '/images/port.png',
+    sourceCodeUrl: 'https://github.com/ankitxrishav/',
     liveDemoUrl: 'https://ankitxk.vercel.app',
     year: new Date().getFullYear(),
   },
@@ -92,6 +92,15 @@ export const projectsData: Project[] = [
     technologies: ['Python', 'Scikit-learn', 'Pandas', 'Seaborn', 'Matplotlib'],
     imageUrl: '/images/crime.png',
     sourceCodeUrl: 'https://github.com/ankitxrishav/Crimes-Against-Women-Analysis-and-prediction',
+    year: 2024,
+  },
+  {
+    id: 'proj-fenristudy',
+    name: 'FenrirStudy App',
+    description: 'A timer-based personalized study application designed to enhance focus and productivity. Features custom study sessions, progress tracking, and a minimal, distraction-free interface for serious learners.',
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'TypeScript'],
+    imageUrl: '/images/fenrirstudy.png',
+    sourceCodeUrl: 'https://github.com/ankitxrishav/FenrirStudy',
     year: 2024,
   },
 ];
