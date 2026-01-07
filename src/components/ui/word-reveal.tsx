@@ -11,6 +11,7 @@ interface WordRevealProps {
     duration?: number;
     triggerThreshold?: number;
     cta?: React.ReactNode;
+    startTrigger?: boolean;
 }
 
 export default function WordReveal({
@@ -20,7 +21,8 @@ export default function WordReveal({
     stagger = 0.05,
     duration = 0.8,
     triggerThreshold = 0.1,
-    cta
+    cta,
+    startTrigger = true
 }: WordRevealProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const wordsContainerRef = useRef<HTMLDivElement>(null);
@@ -28,6 +30,8 @@ export default function WordReveal({
     const [hasAnimated, setHasAnimated] = useState(false);
 
     useEffect(() => {
+        if (!startTrigger) return;
+
         const container = containerRef.current;
         if (!container) return;
 
@@ -54,7 +58,7 @@ export default function WordReveal({
 
         observer.observe(container);
         return () => observer.disconnect();
-    }, [triggerThreshold, hasAnimated]);
+    }, [triggerThreshold, hasAnimated, startTrigger]);
 
     useEffect(() => {
         if (!hasAnimated || !wordsContainerRef.current) return;
@@ -121,4 +125,3 @@ export default function WordReveal({
         </div>
     );
 }
-

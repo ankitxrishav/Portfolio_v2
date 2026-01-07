@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import AppHeader from '@/components/layout/app-header';
 import AppFooter from '@/components/layout/app-footer';
 import SmoothScroll from '@/components/ui/smooth-scroll';
+import { PreloaderProvider } from '@/context/preloader-context';
+import CinematicPreloader from '@/components/layout/cinematic-preloader';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -30,47 +32,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simple fade-in delay
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
-
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (loading) {
-      document.body.style.overflow = 'hidden';
-      const header = document.getElementById('app-header');
-      if (header) {
-        gsap.set(header, { y: '-100%', opacity: 0 });
-      }
-    } else {
-      const preloader = document.getElementById('preloader');
-      const header = document.getElementById('app-header');
-
-      gsap.to(preloader, {
-        opacity: 0,
-        duration: 0.6,
-        onComplete: () => {
-          if (preloader) preloader.style.display = 'none';
-          document.body.style.overflow = 'auto';
-        }
-      });
-
-      if (header) {
-        gsap.to(header, {
-          y: '0%',
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          delay: 0.2
-        });
-      }
-    }
-  }, [loading]);
-
   return (
     <html lang="en" className={`${plusJakarta.variable} ${spaceGrotesk.variable} dark`}>
       <head>
@@ -80,19 +41,17 @@ export default function RootLayout({
         <meta name="theme-color" content="#222222" />
       </head>
       <body className="font-body antialiased bg-background text-foreground">
-        <SmoothScroll>
-          <div id="preloader" className="fixed inset-0 z-[99999] bg-background transition-opacity"></div>
-
-          <AppHeader />
-
-          <main className="flex-grow relative z-10">
-            {children}
-          </main>
-
-          <AppFooter />
-
-          <Toaster />
-        </SmoothScroll>
+        <PreloaderProvider>
+          <SmoothScroll>
+            <CinematicPreloader />
+            <AppHeader />
+            <main className="flex-grow relative z-10">
+              {children}
+            </main>
+            <AppFooter />
+            <Toaster />
+          </SmoothScroll>
+        </PreloaderProvider>
       </body>
     </html>
   );

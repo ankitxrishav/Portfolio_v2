@@ -21,6 +21,8 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { usePreloader } from '@/context/preloader-context';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const HERO_PALETTES = [
@@ -39,6 +41,7 @@ const HERO_PALETTES = [
 ];
 
 export default function HomePage() {
+  const { isLoaded } = usePreloader();
   const [paletteIndex, setPaletteIndex] = useState(0); // This is the TARGET color
   const [currentDisplayIndex, setCurrentDisplayIndex] = useState(0); // This is the STABLE color
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -112,14 +115,17 @@ export default function HomePage() {
           <WordReveal
             text="Ankit Kumar"
             className="font-headline text-6xl md:text-9xl font-black mb-4 tracking-tighter leading-[0.8] uppercase"
-            stagger={0.08}
+            stagger={0.03}
+            delay={700}
+            startTrigger={isLoaded}
           />
 
           <WordReveal
             text="I like turning ideas into things that work."
             className="text-2xl md:text-4xl lg:text-5xl font-extrabold mb-4 tracking-tight leading-tight opacity-90"
             stagger={0.05}
-            delay={400}
+            delay={900}
+            startTrigger={isLoaded}
           />
 
           <HeroDivider />
@@ -128,7 +134,8 @@ export default function HomePage() {
             text="AI & Machine Learning • Creative Developer"
             className="text-[10px] md:text-xs lg:text-sm font-black tracking-[0.4em] opacity-60 uppercase mb-20 mt-8"
             stagger={0.03}
-            delay={800}
+            delay={1200}
+            startTrigger={isLoaded}
             cta={
               <div className="mt-4">
                 <a
@@ -160,8 +167,8 @@ export default function HomePage() {
           title={<WordReveal text="My Projects" className="text-3xl md:text-5xl font-black uppercase tracking-tighter" />}
           subtitle={
             <ScrollReveal animation="fade-up" delay={500}>
-              Here’s a curated list of some of my best work, available on my GitHub:
-              <a href='https://github.com/ankitxrishav' target='_blank' rel='noopener noreferrer' className='text-accent hover:underline ml-1' data-cursor-interactive="true">github.com/ankitxrishav</a>
+              Here’s a curated list of some of my best work, available on my
+              <a href='https://github.com/ankitxrishav' target='https://github.com/ankitxrishav' rel='noopener noreferrer' className='text-accent hover:underline ml-1' data-cursor-interactive="true">Github</a>
             </ScrollReveal>
           }
           aria-labelledby="projects-heading"
