@@ -27,14 +27,23 @@ const PROJECT_PALETTES = [
   { from: '#3B82F6', to: '#2DD4BF' }, // Blue-Teal
 ];
 
+import { usePreloader } from '@/context/preloader-context';
+
 export default function TimelineDisplay({
   paletteIndex = 0,
   prevPaletteIndex = 0,
   isTransitioning = false
 }: TimelineDisplayProps) {
+  const { isLoaded } = usePreloader();
   const containerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const dotRef = useRef<SVGCircleElement>(null);
+
+  useEffect(() => {
+    if (isLoaded) {
+      ScrollTrigger.refresh();
+    }
+  }, [isLoaded]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {

@@ -12,6 +12,8 @@ interface TimelineItemProps {
   isTransitioning?: boolean;
 }
 
+import { usePreloader } from '@/context/preloader-context';
+
 export default function TimelineItem({
   event,
   index,
@@ -19,10 +21,13 @@ export default function TimelineItem({
   prevPalette,
   isTransitioning
 }: TimelineItemProps) {
+  const { isLoaded } = usePreloader();
   const cardRef = useRef<HTMLDivElement>(null);
   const isEven = index % 2 === 0;
 
   useEffect(() => {
+    if (!isLoaded) return; // Wait for preloader to finish
+
     const ctx = gsap.context(() => {
       gsap.fromTo(cardRef.current,
         {
@@ -46,7 +51,7 @@ export default function TimelineItem({
     }, cardRef);
 
     return () => ctx.revert();
-  }, [isEven]);
+  }, [isEven, isLoaded]);
 
   return (
     <div className={cn(

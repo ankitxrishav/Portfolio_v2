@@ -1,25 +1,41 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger'; // Assuming ScrollTrigger is from gsap
 
 interface PreloaderContextType {
     isLoaded: boolean;
     setLoaded: (loaded: boolean) => void;
+    refreshScrollTriggers: () => void;
 }
 
-const PreloaderContext = createContext<PreloaderContextType>({
-    isLoaded: false,
-    setLoaded: () => { },
-});
+const PreloaderContext = createContext<PreloaderContextType | undefined>(undefined);
 
-export const PreloaderProvider = ({ children }: { children: React.ReactNode }) => {
+export function PreloaderProvider({ children }: { children: ReactNode }) {
     const [isLoaded, setIsLoaded] = useState(false);
 
+    const setLoaded = useCallback((loaded: boolean) => {
+        setIsLoaded(loaded);
+    }, []);
+
+    const refreshScrollTriggers = useCallback(() => {
+        // Force refresh multiple times to catch layout shifts
+        setTimeout(() => ScrollTrigger.refresh(), 100);
+        setTimeout(() => ScrollTrigger.refresh(), 500);
+        setTimeout(() => ScrollTrigger.refresh(), 1000);
+    }, []);
+
     return (
-        <PreloaderContext.Provider value={{ isLoaded, setLoaded: setIsLoaded }}>
+        <PreloaderContext.Provider value={{ isLoaded, setLoaded, refreshScrollTriggers }}>
             {children}
         </PreloaderContext.Provider>
     );
-};
+}
 
-export const usePreloader = () => useContext(PreloaderContext);
+export const usePreloader = () => {
+    const context = useContext(PreloaderContext);
+    if (context === undefined) {
+        throw new Error("usePreloader must be used within a PreloaderProvider");
+    }
+    return context;
+};
